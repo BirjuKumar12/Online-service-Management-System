@@ -1,4 +1,4 @@
-# Online-Service-Management-System
+# E-SERVIFY
 A web portal through which user can request for service and the company can assign engineers for the service that is requested by the users.
 
 ## Admin account features
@@ -21,7 +21,7 @@ This account will be created by the company to take action over the services and
 # Screenshots
 ## Requester account
 ### Dashboard
-![Screenshot_2021-02-22 Requester Profile](https://user-images.githubusercontent.com/18730159/108636035-cf872380-74a8-11eb-8273-9fb6f8693f56.png)
+![Screenshot_2021-02-22 Requester Profile](https://user-.githubusercontent.com/18730159/108636035-cf872380-74a8-11eb-8273-9fb6f8693f56.png)images
 
 ### Submit Request
 ![Screenshot_2021-02-22 Submit Request](https://user-images.githubusercontent.com/18730159/108636057-fc3b3b00-74a8-11eb-93ce-88c6fec0aa3f.png)
