@@ -1,4 +1,8 @@
 <?php    
+define('TITLE', 'Work Order');
+define('PAGE', 'work');
+include('includes/header.php'); 
+include('../dbConnection.php');
 if(session_id() == '') {
   session_start();
 }
@@ -46,7 +50,16 @@ if(isset($_SESSION['is_adminlogin'])){
   }
  // Assign work Order Request Data going to submit and save on db assignwork_tb table [END]
  ?>
-<div class="col-sm-5 mt-5 jumbotron">
+ <div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9">
+
   <!-- Main Content area Start Last -->
   <form action="" method="POST">
     <h5 class="text-center">Assign Work Order Request</h5>
@@ -132,3 +145,7 @@ if(isset($_SESSION['is_adminlogin'])){
     }
   }
 </script>
+
+<?php
+include('includes/footer.php'); 
+?>

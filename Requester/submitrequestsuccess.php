@@ -11,7 +11,17 @@ if($_SESSION['is_login']){
 $sql = "SELECT * FROM submitrequest_tb WHERE request_id = {$_SESSION['myid']}";
 $result = $conn->query($sql);
 if($result->num_rows == 1){
- $row = $result->fetch_assoc();
+ $row = $result->fetch_assoc();?>
+ <div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Request Form -->
+        <div class="col-sm-9 mt-5">
+<?php 
  echo "<div class='ml-5 mt-5'>
  <table class='table'>
   <tbody>
@@ -32,12 +42,12 @@ if($result->num_rows == 1){
     <td>".$row['request_info']."</td>
    </tr>
    <tr>
-    <th>Request Description</th>
+    <th> Request Description</th>
     <td>".$row['request_desc']."</td>
    </tr>
 
    <tr>
-    <td><form class='d-print-none'><input class='btn btn-danger' type='submit' value='Print' onClick='window.print()'></form></td>
+    <td><form class='d-print-none'><input class='btn btn-dark' type='submit' value='Print' onClick='window.print()'></form></td>
   </tr>
   </tbody>
  </table> </div>

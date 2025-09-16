@@ -1,54 +1,74 @@
-<?php
+<?php 
 define('TITLE', 'Requester Profile');
 define('PAGE', 'RequesterProfile');
 include('includes/header.php'); 
 include('../dbConnection.php');
- session_start();
- if($_SESSION['is_login']){
-  $rEmail = $_SESSION['rEmail'];
- } else {
-  echo "<script> location.href='RequesterLogin.php'; </script>";
- }
 
- $sql = "SELECT * FROM requesterlogin_tb WHERE r_email='$rEmail'";
- $result = $conn->query($sql);
- if($result->num_rows == 1){
- $row = $result->fetch_assoc();
- $rName = $row["r_name"]; }
+session_start();
+if(!isset($_SESSION['is_login'])){
+    echo "<script> location.href='RequesterLogin.php'; </script>";
+    exit();
+}
 
- if(isset($_REQUEST['nameupdate'])){
-  if(($_REQUEST['rName'] == "")){
-   // msg displayed if required field missing
-   $passmsg = '<div class="alert alert-warning col-sm-6 ml-5 mt-2" role="alert"> Fill All Fileds </div>';
-  } else {
-   $rName = $_REQUEST["rName"];
-   $sql = "UPDATE requesterlogin_tb SET r_name = '$rName' WHERE r_email = '$rEmail'";
-   if($conn->query($sql) == TRUE){
-   // below msg display on form submit success
-   $passmsg = '<div class="alert alert-success col-sm-6 ml-5 mt-2" role="alert"> Updated Successfully </div>';
-   } else {
-   // below msg display on form submit failed
-   $passmsg = '<div class="alert alert-danger col-sm-6 ml-5 mt-2" role="alert"> Unable to Update </div>';
-      }
+$rEmail = $_SESSION['rEmail'];
+$rName = ""; 
+
+// Fetch user details
+$sql = "SELECT r_name FROM requesterlogin_tb WHERE r_email='$rEmail'";
+$result = $conn->query($sql);
+if($result->num_rows > 0){
+    $row = $result->fetch_assoc();
+    $rName = $row["r_name"];
+}
+
+// Handle profile update
+if(isset($_REQUEST['nameupdate'])){
+    $rName = trim($_REQUEST["rName"]); 
+    if(empty($rName)){
+        $passmsg = '<div class="alert alert-warning mt-2" role="alert">Please enter your name!</div>';
+    } else {
+        $sql = "UPDATE requesterlogin_tb SET r_name = '$rName' WHERE r_email = '$rEmail'";
+        if($conn->query($sql) === TRUE){
+            $passmsg = '<div class="alert alert-success mt-2" role="alert">Profile Updated Successfully!</div>';
+        } else {
+            $passmsg = '<div class="alert alert-danger mt-2" role="alert">Unable to Update Profile!</div>';
+        }
     }
-   }
+}
 ?>
-<div class="col-sm-6 mt-5">
-  <form class="mx-5" method="POST">
-    <div class="form-group">
-      <label for="inputEmail">Email</label>
-      <input type="email" class="form-control" id="inputEmail" value=" <?php echo $rEmail ?>" readonly>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9">
+            <div class="card shadow-lg">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3><i class="fas fa-user-circle"></i> My Profile</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="inputEmail"><strong>Email</strong></label>
+                            <input type="email" class="form-control" id="inputEmail" 
+                                   value="<?php echo htmlspecialchars($rEmail); ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName"><strong>Name</strong></label>
+                            <input type="text" class="form-control" id="inputName" name="rName" 
+                                   value="<?php echo htmlspecialchars($rName); ?>">
+                        </div>
+                    
+                        <?php if(isset($passmsg)) { echo $passmsg; } ?>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-      <label for="inputName">Name</label>
-      <input type="text" class="form-control" id="inputName" name="rName" value=" <?php echo $rName ?>">
-    </div>
-    <button type="submit" class="btn btn-danger" name="nameupdate">Update</button>
-    <?php if(isset($passmsg)) {echo $passmsg; } ?>
-  </form>
 </div>
-</div>
-</div>
-<?php
-include('includes/footer.php'); 
-?>
+
+<?php include('includes/footer.php'); ?>

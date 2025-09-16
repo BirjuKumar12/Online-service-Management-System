@@ -10,6 +10,15 @@ session_start();
   echo "<script> location.href='login.php'; </script>";
  }
 ?>
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9 mt-5">
 <div class="col-sm-9 col-md-10 mt-5 text-center">
   <!--Table-->
   <p class=" bg-dark text-white p-2">List of Technicians</p>

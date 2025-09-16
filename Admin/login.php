@@ -49,7 +49,7 @@ if(!isset($_SESSION['is_adminlogin'])){
     <span>Online Maintenance Managment System</span>
   </div>
   <p class="text-center" style="font-size: 20px;"> <i class="fas fa-user-secret text-danger"></i> <span>Admin
-      Area(Demo)</span>
+      Area</span>
   </p>
   <div class="container-fluid mb-5">
     <div class="row justify-content-center custom-margin">
@@ -65,7 +65,7 @@ if(!isset($_SESSION['is_adminlogin'])){
             <i class="fas fa-key"></i><label for="pass" class="pl-2 font-weight-bold">Password</label><input type="password"
               class="form-control" placeholder="Password" name="aPassword">
           </div>
-          <button type="submit" class="btn btn-outline-danger mt-3 btn-block shadow-sm font-weight-bold">Login</button>
+          <button type="submit" class="btn btn-outline-dark mt-3 btn-block shadow-sm font-weight-bold">Login</button>
           <?php if(isset($msg)) {echo $msg; } ?>
         </form>
         <div class="text-center"><a class="btn btn-info mt-3 shadow-sm font-weight-bold" href="../index.php">Back

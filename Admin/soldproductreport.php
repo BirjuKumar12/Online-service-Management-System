@@ -10,7 +10,15 @@ session_start();
   echo "<script> location.href='login.php'; </script>";
  } 
 ?>
-<div class="col-sm-9 col-md-10 mt-5 text-center">
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9 mt-5">
   <form action="" method="POST" class="d-print-none">
     <div class="form-row">
       <div class="form-group col-md-2">
@@ -70,6 +78,9 @@ session_start();
  }
   ?>
 </div>
+</div>
+</div>
+
 </div>
 </div>
 

@@ -10,7 +10,18 @@ session_start();
   echo "<script> location.href='login.php'; </script>";
  }
 ?>
-<div class="col-sm-9 col-md-10 mt-5">
+<div class="container-fluid mt-4">
+
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9"><h1>List Of Works</h1>
+
+
   <?php 
  $sql = "SELECT * FROM assignwork_tb";
  $result = $conn->query($sql);

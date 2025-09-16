@@ -10,7 +10,15 @@ session_start();
   echo "<script> location.href='login.php'; </script>";
  }
 ?>
-<div class="col-sm-9 col-md-10 mt-5 text-center">
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9">
   <form action="" method="POST" class="d-print-none">
     <div class="form-row">
       <div class="form-group col-md-2">
@@ -28,7 +36,7 @@ session_start();
  if(isset($_REQUEST['searchsubmit'])){
     $startdate = $_REQUEST['startdate'];
     $enddate = $_REQUEST['enddate'];
-    $sql = "SELECT * FROM assignwork_tb WHERE assign_date BETWEEN '$startdate' AND '$enddate'";
+    $sql = "SELECT * FROM assignwork_technical_tb WHERE assign_date BETWEEN '$startdate' AND '$enddate'";
     $result = $conn->query($sql);
     if($result->num_rows > 0){
      echo '
@@ -55,7 +63,7 @@ session_start();
     <td>'.$row["requester_add2"].'</td>
     <td>'.$row["requester_city"].'</td>
     <td>'.$row["requester_mobile"].'</td>
-    <td>'.$row["assign_tech"].'</td>
+    <td>'.$row["technician_name"].'</td>
     <td>'.$row["assign_date"].'</td>
       </tr>';
     }
@@ -69,6 +77,9 @@ session_start();
  }
   ?>
 </div>
+</div>
+</div>
+
 </div>
 </div>
 

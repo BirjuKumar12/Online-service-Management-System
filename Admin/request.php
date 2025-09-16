@@ -10,7 +10,16 @@ session_start();
   echo "<script> location.href='login.php'; </script>";
  }
 ?>
-<div class="col-sm-4 mb-5">
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9">
+
   <!-- Main Content area start Middle -->
   <?php 
  $sql = "SELECT request_id, request_info, request_desc, request_date FROM submitrequest_tb";

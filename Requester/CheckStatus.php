@@ -10,8 +10,17 @@ if($_SESSION['is_login']){
  echo "<script> location.href='RequesterLogin.php'; </script>";
 }
 ?>
-<div class="col-sm-6 mt-5  mx-3">
-  <form action="" class="mt-3 form-inline d-print-none">
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9">
+<form action="" class="mt-3 form-inline d-print-none">
     <div class="form-group mr-3">
       <label for="checkid">Enter Request ID: </label>
       <input type="text" class="form-control ml-3" id="checkid" name="checkid" onkeypress="isInputNumber(event)">

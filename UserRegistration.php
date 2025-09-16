@@ -1,54 +1,83 @@
-<?php
+<?php 
   include('dbConnection.php');
 
   if(isset($_REQUEST['rSignup'])){
-    // Checking for Empty Fields
     if(($_REQUEST['rName'] == "") || ($_REQUEST['rEmail'] == "") || ($_REQUEST['rPassword'] == "")){
-      $regmsg = '<div class="alert alert-warning mt-2" role="alert"> All Fields are Required </div>';
+      $regmsg = '<div class="alert alert-danger mt-2 text-center" role="alert">All fields are required!</div>';
     } else {
       $sql = "SELECT r_email FROM requesterlogin_tb WHERE r_email='".$_REQUEST['rEmail']."'";
       $result = $conn->query($sql);
-      if($result->num_rows == 1){
-        $regmsg = '<div class="alert alert-warning mt-2" role="alert"> Email ID Already Registered </div>';
+      if($result->num_rows > 0){
+        $regmsg = '<div class="alert alert-warning mt-2 text-center" role="alert">Email ID Already Registered!</div>';
       } else {
-        // Assigning User Values to Variable
         $rName = $_REQUEST['rName'];
         $rEmail = $_REQUEST['rEmail'];
-        $rPassword = $_REQUEST['rPassword'];
-        $sql = "INSERT INTO requesterlogin_tb(r_name, r_email, r_password) VALUES ('$rName','$rEmail', '$rPassword')";
+        $rPassword = password_hash($_REQUEST['rPassword'], PASSWORD_BCRYPT); // More secure password hashing
+        $sql = "INSERT INTO requesterlogin_tb (r_name, r_email, r_password) VALUES ('$rName', '$rEmail', '$rPassword')";
         if($conn->query($sql) == TRUE){
-          $regmsg = '<div class="alert alert-success mt-2" role="alert"> Account Succefully Created </div>';
+          $regmsg = '<div class="alert alert-success mt-2 text-center" role="alert">Account Successfully Created!</div>';
         } else {
-          $regmsg = '<div class="alert alert-danger mt-2" role="alert"> Unable to Create Account </div>';
+          $regmsg = '<div class="alert alert-danger mt-2 text-center" role="alert">Error: Unable to create account!</div>';
         }
       }
     }
   }
 ?>
-<div class="container pt-5" id="registration">
-  <h2 class="text-center">Create an Account</h2>
-  <div class="row mt-4 mb-4">
-    <div class="col-md-6 offset-md-3">
-      <form action="" class="shadow-lg p-4" method="POST">
-        <div class="form-group">
-          <i class="fas fa-user"></i><label for="name" class="pl-2 font-weight-bold">Name</label><input type="text"
-            class="form-control" placeholder="Name" name="rName">
-        </div>
-        <div class="form-group">
-          <i class="fas fa-user"></i><label for="email" class="pl-2 font-weight-bold">Email</label><input type="email"
-            class="form-control" placeholder="Email" name="rEmail">
-          <!--Add text-white below if want text color white-->
-          <small class="form-text">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-          <i class="fas fa-key"></i><label for="pass" class="pl-2 font-weight-bold">New
-            Password</label><input type="password" class="form-control" placeholder="Password" name="rPassword">
-        </div>
-        <button type="submit" class="btn btn-danger mt-5 btn-block shadow-sm font-weight-bold" name="rSignup">Sign Up</button>
-        <em style="font-size:10px;">Note - By clicking Sign Up, you agree to our Terms, Data
-          Policy and Cookie Policy.</em>
-        <?php if(isset($regmsg)) {echo $regmsg; } ?>
-      </form>
-    </div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup | Online Service Management</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      font-family: 'Arial', sans-serif;
+    }
+    .signup-container {
+      max-width: 400px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      margin: 80px auto;
+    }
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .btn-signup {
+      background: #2575fc;
+      color: #fff;
+    }
+    .btn-signup:hover {
+      background: #1a5ecb;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>🔐 Create an Account</h2>
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-control" name="rName" placeholder="Enter your name">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-control" name="rEmail" placeholder="Enter your email">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" name="rPassword" placeholder="Create a password">
+      </div>
+      <button type="submit" class="btn btn-signup w-100" name="rSignup">Sign Up</button>
+      <p class="text-center mt-3">Already have an account? <a href="Requester/RequesterLogin.php">Login here</a></p>
+      <?php if(isset($regmsg)) { echo $regmsg; } ?>
+    </form>
   </div>
-</div>
+</body>
+</html>

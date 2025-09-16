@@ -33,7 +33,15 @@ if($_SESSION['is_login']){
 }
 
 ?>
-<div class="col-sm-9 col-md-10">
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9">
   <div class="row">
     <div class="col-sm-6">
       <form class="mt-5 mx-5" method="POST">

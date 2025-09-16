@@ -35,7 +35,15 @@ session_start();
   }
   }
  ?>
-<div class="col-sm-6 mt-5  mx-3 jumbotron">
+ <div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9">
   <h3 class="text-center">Update Product Details</h3>
   <?php
  if(isset($_REQUEST['view'])){

@@ -24,6 +24,16 @@ session_start();
  $totaltech = $result->num_rows;
 
 ?>
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <?php include('includes/sidebar.php'); ?>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="col-md-9">
+
 <div class="col-sm-9 col-md-10">
   <div class="row mx-5 text-center">
     <div class="col-sm-4 mt-5">
@@ -41,7 +51,7 @@ session_start();
       <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
         <div class="card-header">Assigned Work</div>
         <div class="card-body">
-          <h4 class="card-title">
+          <h4 class="card-title">43
             <?php echo $assignwork; ?>
           </h4>
           <a class="btn text-white" href="work.php">View</a>
@@ -89,6 +99,8 @@ session_start();
 }
 ?>
   </div>
+</div>
+</div>
 </div>
 </div>
 </div>
